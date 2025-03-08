@@ -32,7 +32,7 @@ void generateRandNum(int arr[], int n){
         }
     }
     //merge sort
-    void mergeS(int arr[], int l, int c, int r){
+    void merge(int arr[], int l, int c, int r){
         int x =c -l +1;
         int y = r-c;
         int L[x], R[y];
@@ -42,8 +42,8 @@ void generateRandNum(int arr[], int n){
         int j=0;
         int k = l;
         while (i< x && j< y){
-            if (L[i]<= R[j] arr[k++] =L[i++];
-            else arr[k++] =R[j++]);
+            if (L[i]<= R[j]) arr[k++] =L[i++];
+            else arr[k++] =R[j++];
         }
         while (i < x) arr[k++] =L[i++];
         while (j<y) arr[k++] = R[j++];
@@ -51,7 +51,7 @@ void generateRandNum(int arr[], int n){
         void mergeS(int arr[], int l, int r){
             if (l< r){
                 int c =l+ (r-l) /2;
-                mergeS(arr, l c);
+                mergeS(arr, l ,c);
                 mergeS(arr, c+1, r);
                 merge(arr, l, c, r);
             }
@@ -61,8 +61,8 @@ void generateRandNum(int arr[], int n){
             while (l <= r){
                 int c = l +(r -l)/2;
                 if (arr[c] == key)return c;
-                if (arr[c] < key)l=m+1;
-                else r=m -1;
+                if (arr[c] < key)l=c+1;
+                else r=c -1;
             }
             return -1;
         }
@@ -83,33 +83,34 @@ void generateRandNum(int arr[], int n){
         }
         int main(){
             int n;
-            cout "Enter a number:";
+            cout <<"Enter a number: ";
             cin>> n;
             int arr[n], arrCopy[n];
             //generate num and display
-            cout << "Random numbers:";
-            displayArray(arr,n);
+            generateRandNum(arr,n);
+            cout << "Random numbers: ";
+            output(arr, n);
             //sort using selection 
             copy(arr, arr+n, arrCopy);
             auto start = high_resolution_clock::now();
             selectionSort(arrCopy, n);
             auto stop =high_resolution_clock::now();
             auto durationSelection =duration_cast<nanoseconds>(stop -start);
-            cout<< "Output from selection sort:";
-            displayArray(arrCopy, n);
-            cout<<"Time taken:"<< durationSelection.coutn()<< "ns\n";
+            cout<< "Output from selection sort: ";
+            output(arrCopy, n);
+            cout<<"Time taken: "<< durationSelection.count()<< "ns\n";
             //merge sort
             copy(arr, arr +n, arrCopy);
             start =high_resolution_clock::now();
             mergeS(arrCopy, 0,n-1);
             stop =high_resolution_clock::now();
             auto durationMerge =duration_cast<nanoseconds>(stop -start);
-            cout <<"Output from merge sort:";
-            displayArray(arrCopy, n);
-            cout<<"Time taken:"<<durationMerge.count() << "ns\n";
+            cout <<"Output from merge sort: ";
+            output(arrCopy, n);
+            cout<<"Time taken: "<<durationMerge.count() << "ns\n";
             // ask user for the number to search
             int search;
-            cout <<"Enter the number you want to search:";
+            cout <<"Enter the number you want to search: ";
             cin>> search;
             // perform binary search 
             start =high_resolution_clock::now();
@@ -117,19 +118,19 @@ void generateRandNum(int arr[], int n){
             stop = high_resolution_clock::now();
             auto durationBinary =duration_cast<nanoseconds>(stop-start);
             if(bResult != -1)
-            cout<< "Using binary search, "<< searchValue <<"number found at"<< bResult << "index" <<".\n;";
+            cout<< "Using binary search, "<< search <<" 23found at "<< bResult << " index" <<".\n";
             else 
-            cout << "Binary Search number "<<searchValue<<"not found.\n";
-            cout <<"Binary Search Time:" <<durationBinary.count() <<"ns\n";
+            cout << "Binary Search number "<<search<<"not found.\n";
+            cout <<"Binary Search Time: " <<durationBinary.count() <<"ns\n";
             //interpolation search
             start=high_resolution_clock::now();
             int iResult =iSearch(arrCopy,n,search);
             stop =high_resolution_clock::now();
             auto durationInterpolation =duration_cast<nanoseconds>(stop -start);
             if(iResult !=-1)
-            cout "Using interpolation search, "<< searchValue << "number found at"<< iResult << "index"<<".\n";
+            cout <<"Using interpolation search, "<< search << " found at "<< iResult << " index"<<".\n";
             else
-            cout <<"Interpolation search number" <<search <<"not found.\n";
-            cout <<"Interpolation Search time:"<<durationInterpolation.count()<<"ns\n";
+            cout <<"Interpolation search number " <<search <<"not found.\n";
+            cout <<"Interpolation Search time: "<<durationInterpolation.count()<<"ns\n";
             return 0;
         }
