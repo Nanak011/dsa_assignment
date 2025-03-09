@@ -118,7 +118,7 @@ void generateRandNum(int arr[], int n){
             stop = high_resolution_clock::now();
             auto durationBinary =duration_cast<nanoseconds>(stop-start);
             if(bResult != -1)
-            cout<< "Using binary search, "<< search <<" 23found at "<< bResult << " index" <<".\n";
+            cout<< "Using binary search, "<< search <<" found at "<< bResult << " index" <<".\n";
             else 
             cout << "Binary Search number "<<search<<"not found.\n";
             cout <<"Binary Search Time: " <<durationBinary.count() <<"ns\n";
